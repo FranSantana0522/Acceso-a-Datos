@@ -1,0 +1,38 @@
+package examen;
+
+public class Contacto {
+	private String nombre;
+	private Integer tlf;
+	private String correo;
+	
+	
+	@Override
+	public String toString() {
+		return "Contacto [Nombre=" + nombre + ", tlf=" + tlf + ", correo=" + correo + "]";
+	}
+	public Contacto(String nombre, Integer tlf, String correo) {
+		super();
+		this.nombre = nombre;
+		this.tlf = tlf;
+		this.correo = correo;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public Integer getTlf() {
+		return tlf;
+	}
+	public void setTlf(Integer tlf) {
+		this.tlf = tlf;
+	}
+	public String getCorreo() {
+		return correo;
+	}
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+	
+}

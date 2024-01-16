@@ -1,0 +1,21 @@
+Carlos Rodríguez
+555-123-4567
+carlos@example.com
+Diana Navarro
+622003399
+dianan@gmail.com
+Juan Pérez
+123-456-7890
+juan@example.com
+María López
+987-654-3210
+maria@example.com
+Pepe
+222222222
+pepe@hh.com
+paco
+23234
+paco
+luisa
+432432
+apapap

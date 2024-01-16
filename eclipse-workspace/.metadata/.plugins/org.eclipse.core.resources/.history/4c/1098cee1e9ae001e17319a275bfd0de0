@@ -1,0 +1,5 @@
+package com.accesodatos.hibernate.otrareunionmas.dominio;
+
+public class Persona {
+
+}

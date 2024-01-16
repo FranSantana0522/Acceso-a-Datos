@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;Conexion_BD.Tarea4_1&apos; to &apos;RepasoSQL&apos;&#x0A;- Original project: &apos;AcessoDatos&apos;&#x0A;- Original element: &apos;Conexion_BD.Tarea4_1&apos;&#x0A;- Renamed element: &apos;Conexion_BD.RepasoSQL&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Tarea4_1&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;Conexion_BD{Tarea4_1.java[Tarea4_1" matchStrategy="1" name="RepasoSQL" qualified="false" references="true" similarDeclarations="false" stamp="1700572484391" textual="false" version="1.0"/>
+</session>

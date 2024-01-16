@@ -1,0 +1,16 @@
+package com.accesodatos.hibernate.otrareunionmas.dao;
+
+import java.util.List;
+
+import com.accesodatos.hibernate.otrareunionmas.dao.abstractDao.AbstractDao;
+import com.accesodatos.hibernate.otrareunionmas.dominio.Acta;
+import com.accesodatos.hibernate.otrareunionmas.dominio.Sala;
+
+public class ActaDao extends AbstractDao<Acta>{
+	public ActaDao() {
+		setClazz(Acta.class);
+	}
+	public List<Acta> findActasReunionesAntiguas(){
+		String qlString=" FROM "+Acta.class.getName()+" a WHERE a.reunion.fecha<:ayer	"
+	}
+}

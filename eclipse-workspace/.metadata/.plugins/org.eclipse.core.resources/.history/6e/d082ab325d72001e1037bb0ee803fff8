@@ -1,0 +1,39 @@
+package examen;
+
+import java.io.File;
+import java.util.ArrayList;
+
+public class AgendaContactos {
+	ArrayList<Contacto> agen = new ArrayList<Contacto>();
+	File nomArchivo = new File("agenda.txt");
+
+	public AgendaContactos() {
+		if(!nomArchivo.exists()) {
+			cargarContactosDesdeArchivo();
+		}else {
+			
+		}
+	}
+
+	public void cargarContactosDesdeArchivo() {
+	}
+
+	public void guardarContactosEnArchivo() {
+	}
+
+	public void guardarContactosEnArchivoBin() {
+	}
+
+	public void agregarContacto(String nombre, String telefono, String correo) {
+	}
+
+	public void listarContactos() {
+		for (int i = 0; i < agen.size(); i++) {
+			System.out.println("Nombre: " + agen.get(i).getNombre();
+			System.out.println("Teléfono: " + contacto.getTlf());
+			System.out.println("Correo Electrónico: " + contacto.getCorreo());
+			System.out.println();
+		}
+	}
+
+}

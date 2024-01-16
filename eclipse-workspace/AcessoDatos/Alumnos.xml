@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Alumnos>
+    <alumno nombre="fran">
+        <Materias>
+            <materia nombre="sge">
+                <nota>10.0</nota>
+            </materia>
+        </Materias>
+    </alumno>
+    <alumno nombre="Paco">
+        <Materias>
+            <materia nombre="SGE">
+                <nota>0</nota>
+            </materia>
+        </Materias>
+    </alumno>
+    <alumno nombre="Paco2">
+        <Materias>
+            <materia nombre="SGE">
+                <nota>5</nota>
+            </materia>
+        </Materias>
+    </alumno>
+</Alumnos>

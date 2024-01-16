@@ -1,0 +1,68 @@
+package examen;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class AgendaContactos {
+	ArrayList<Contacto> agen;
+	final File nomArchivo = new File("agenda.txt");
+
+	public AgendaContactos() {
+		if(!nomArchivo.exists()) {
+			agen = new ArrayList<Contacto>();
+		}else {
+			cargarContactosDesdeArchivo();
+		}
+	}
+
+	public void cargarContactosDesdeArchivo() {
+		try {
+			BufferedReader br=new BufferedReader(new FileReader(nomArchivo));
+			String linea;
+			while(true) {
+				linea=br.readLine();
+				String nombre=linea;
+				linea=br.readLine();
+				String tlf=linea;
+				linea=br.readLine();
+				String correo=linea;
+				agen.add(new Contacto(nombre,tlf,correo));
+			}
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void guardarContactosEnArchivo() {
+		try {
+			BufferedWriter bw=new BufferedWriter(new FileWriter(nomArchivo));
+			for() {
+				
+			}
+			bw.write(agen.get(i));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void guardarContactosEnArchivoBin() {
+	}
+
+	public void agregarContacto(String nombre, String telefono, String correo) {
+	}
+
+	public void listarContactos() {
+		for (int i = 0; i < agen.size(); i++) {
+			System.out.println("Nombre: " + agen.get(i).getNombre());
+			System.out.println("Teléfono: " + agen.get(i).getTlf());
+			System.out.println("Correo Electrónico: " + agen.get(i).getCorreo());
+			System.out.println();
+		}
+	}
+
+}

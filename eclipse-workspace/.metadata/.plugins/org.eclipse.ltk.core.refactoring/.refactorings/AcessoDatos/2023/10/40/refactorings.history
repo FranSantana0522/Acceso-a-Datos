@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;prueba.EscribirFichero&apos; to &apos;LeerFicherosBuf&apos;&#x0A;- Original project: &apos;AcessoDatos&apos;&#x0A;- Original element: &apos;prueba.EscribirFichero&apos;&#x0A;- Renamed element: &apos;prueba.LeerFicherosBuf&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;EscribirFichero&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;prueba{EscribirFichero.java[EscribirFichero" matchStrategy="1" name="LeerFicherosBuf" qualified="false" references="true" similarDeclarations="false" stamp="1696414170141" textual="false" version="1.0"/>
+</session>

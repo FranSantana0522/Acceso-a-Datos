@@ -1,0 +1,8 @@
+package com.accesodatos.hibernate.otrareunionmas.dao;
+
+import com.accesodatos.hibernate.otrareunionmas.dao.abstractDao.AbstractDao;
+import com.accesodatos.hibernate.otrareunionmas.dominio.Acta;
+
+public class PersonaDao extends AbstractDao<Persona>{
+
+}

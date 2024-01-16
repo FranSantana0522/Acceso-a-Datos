@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Dec 12 14:33:13 CET 2023:
+ Iniciando instancia a816c00e-018c-5e3b-49e6-00000eaf8478 de Derby, versión The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): 
+en el directorio de base de datos /home/usuario/db-derby-10.17.1.0-bin/testDB con el cargador de clases jdk.internal.loader.ClassLoaders$AppClassLoader@24d46ca6
+Cargado desde file:/home/usuario/Descargas/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=21.0.1+12-LTS-29
+user.dir=/home/usuario/eclipse-workspace/AcessoDatos
+os.name=Linux
+os.arch=amd64
+os.version=5.15.0-89-generic
+derby.system.home=null
+Cargador de clases de base de datos iniciado - derby.database.classpath=''
