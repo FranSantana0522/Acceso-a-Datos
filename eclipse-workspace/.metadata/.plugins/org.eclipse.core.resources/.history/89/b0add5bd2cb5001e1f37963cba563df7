@@ -1,0 +1,7 @@
+package com.accesodatos.hibernate.andaluciaskills.dao;
+
+import com.accesodatos.hibernate.andaluciaskills.dao.abstracDao.AbstractDao;
+
+public class UsuarioDao extends AbstractDao<Usuario>{
+
+}

@@ -1,0 +1,26 @@
+package com.accesodatos.hibernate.andaluciaskills.dominio;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Puntuacion_Prueba")
+public class Puntuacion_Prueba {
+	@Id
+
+	@ManyToOne
+
+	@JoinColumn(name = "competidor_id")
+
+	private Competidor competidor;
+
+
+
+	@Id
+
+	@ManyToOne
+
+	@JoinColumn(name = "prueba_id")
+
+	private Prueba prueba;
+}

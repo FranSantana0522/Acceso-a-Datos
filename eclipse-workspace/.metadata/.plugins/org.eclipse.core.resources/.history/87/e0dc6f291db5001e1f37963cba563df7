@@ -1,0 +1,12 @@
+package com.accesodatos.hibernate.andaluciaskills.dominio;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Experto")
+public class Experto {
+	@id
+	@
+	private int id;
+}

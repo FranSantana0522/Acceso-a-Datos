@@ -1,0 +1,37 @@
+package com.accesodatos.hibernate.andaluciaskills.dominio;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Competidor")
+public class Competidor {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	
+	private String nombre;
+	
+	private String centro;
+	
+	@ManyToOne
+	@JoinColumn
+	private Especialidad id_especialidad;
+
+	public Competidor() {
+		super();
+	}
+
+	public Competidor(String nombre, String centro) {
+		super();
+		this.nombre = nombre;
+		this.centro = centro;
+	}
+	
+	
+}

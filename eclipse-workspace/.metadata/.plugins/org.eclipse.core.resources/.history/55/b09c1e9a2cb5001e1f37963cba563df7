@@ -1,0 +1,5 @@
+package com.accesodatos.hibernate.andaluciaskills.dao;
+
+public class Puntuacion_PruebaDao {
+
+}
