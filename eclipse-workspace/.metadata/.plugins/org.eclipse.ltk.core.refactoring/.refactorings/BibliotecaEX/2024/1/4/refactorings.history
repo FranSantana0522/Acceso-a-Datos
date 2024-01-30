@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;rowCount&apos; in &apos;App.main(...)&apos; to &apos;lineasAfectadas&apos;&#x0A;- Original project: &apos;BibliotecaEX&apos;&#x0A;- Original element: &apos;App.main(String[]).rowCount&apos;&#x0A;- Renamed element: &apos;rowCount&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;rowCount&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;{App.java[App~main~\[QString;@rowCount!3384!3458!3388!3395!I!0!false" name="lineasAfectadas" references="true" stamp="1706091481687" version="1.0"/>
+</session>

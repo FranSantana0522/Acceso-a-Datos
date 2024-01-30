@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<envasados>
+	<contenedor tipo="Grande">
+		<envase tipo="Grande ancho">
+			<liquido>Agua</liquido>
+		</envase>
+		<envase tipo="Grande ancho">
+			<liquido>Leche</liquido>
+		</envase>
+		<envase tipo="Mediano ancho">
+			<liquido>Vinagre</liquido>
+		</envase>
+		<envase tipo="Pequeño">
+			<liquido>Amoniaco</liquido>
+		</envase>
+	</contenedor>
+	<contenedor tipo="Mediano">
+		<envase tipo="Mediano ancho">
+			<liquido>Aceite</liquido>
+		</envase>
+		<envase tipo="Pequeño">
+			<liquido>Lejia</liquido>
+		</envase>
+		<envase tipo="Pequeño">
+			<liquido>Aguarras</liquido>
+		</envase>
+	</contenedor>
+	<contenedor tipo="Vertical">
+		<envase tipo="Mediano alto">
+			<liquido>Gasolina</liquido>
+		</envase>
+		<envase tipo="Mediano alto">
+			<liquido>Alcohol</liquido>
+		</envase>
+		<envase tipo="Grande alto">
+			<liquido>Agua</liquido>
+		</envase>
+	</contenedor>
+
+	
+</envasados>

@@ -1,7 +1,0 @@
-package com.accesodatos.hibernate.andaluciaskills.dao;
-
-import com.accesodatos.hibernate.andaluciaskills.dao.abstracDao.AbstractDao;
-
-public class CompetidorDao extends AbstractDao<Competidor>{
-	
-}

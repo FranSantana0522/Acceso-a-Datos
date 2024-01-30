@@ -1,6 +1,0 @@
-package com.accesodatos.hibernate.andaluciaskills.dominio;
-
-@Entity
-public class Experto {
-
-}

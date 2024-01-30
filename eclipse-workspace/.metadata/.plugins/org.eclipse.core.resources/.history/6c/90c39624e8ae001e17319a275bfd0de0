@@ -1,7 +1,0 @@
-package com.accesodatos.hibernate.otrareunionmas.dominio;
-
-@Entity
-@Table(name="Acta")
-public class Acta {
-
-}

@@ -1,7 +1,0 @@
-package com.accesodatos.hibernate.andaluciaskills.dominio;
-
-@Entity
-@Talbe(name="Experto")
-public class Experto {
-
-}

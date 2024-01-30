@@ -1,0 +1,54 @@
+package dao;
+
+import java.util.List;
+
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import dominio.Ejemplar;
+import dominio.Libro;
+
+public class EjemplarDao extends AbstractDao<Ejemplar> {
+
+	public EjemplarDao() {
+		setClazz(Ejemplar.class);
+	}
+	
+	public List<Ejemplar> getEjemplaresEditorial(String editorial) {
+		String qlString=" FROM "+Ejemplar.class.getName() +" WHERE libro.editorial='"+editorial+"'";
+		Query query = getEntityManager().createQuery(qlString);
+				
+		return query.getResultList();
+	}
+	
+	public List<Ejemplar> getEjemplaresLibrosMasPaginas(int paginas) {
+        List<Ejemplar> ejemplares = null;
+
+        try {
+            CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+            CriteriaQuery<Ejemplar> cq = cb.createQuery(Ejemplar.class);
+
+            // Definir las entidades raíces (Ejemplar y Libro)
+            Root<Ejemplar> ejemplarRoot = cq.from(Ejemplar.class);
+            Join<Ejemplar, Libro> libroJoin = ejemplarRoot.join("libro");
+
+            // Definir la condición (libro.paginas > paginas)
+            Predicate condicion = cb.greaterThan(libroJoin.get("paginas"), paginas);
+
+            // Construir la consulta
+            cq.select(ejemplarRoot).where(condicion);
+
+            // Ejecutar la consulta
+            ejemplares = getEntityManager().createQuery(cq).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ejemplares;
+    }
+	
+}

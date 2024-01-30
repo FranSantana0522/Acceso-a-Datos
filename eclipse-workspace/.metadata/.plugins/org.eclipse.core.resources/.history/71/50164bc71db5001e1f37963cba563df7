@@ -1,7 +1,0 @@
-package com.accesodatos.hibernate.andaluciaskills.dominio;
-
-@Entity
-@Table(name="Especialidad")
-public class Especialidad {
-
-}

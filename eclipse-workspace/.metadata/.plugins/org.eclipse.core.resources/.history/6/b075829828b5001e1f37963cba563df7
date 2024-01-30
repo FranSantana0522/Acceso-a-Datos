@@ -1,7 +1,0 @@
-package com.accesodatos.hibernate.andaluciaskills.dominio;
-
-@Entity
-@Table(name="Puntuacion_Prueba")
-public class Puntuacion_Prueba {
-
-}

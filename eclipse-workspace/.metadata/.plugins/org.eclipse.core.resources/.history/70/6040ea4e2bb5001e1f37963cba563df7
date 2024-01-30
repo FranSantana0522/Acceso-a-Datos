@@ -1,5 +1,0 @@
-package com.accesodatos.hibernate.andaluciaskills.dao;
-
-public class CompetidorDao {
-	
-}

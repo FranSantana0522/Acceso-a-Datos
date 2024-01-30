@@ -2,5 +2,6 @@
 <dirs>
     <entry loc="/home/usuario/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_17.0.8.v20230831-1047/jre" stamp="1696332026958"/>
     <entry loc="/home/usuario/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_17.0.8.v20230831-1047" stamp="1696332026958"/>
+    <entry loc="/usr/lib/jvm/java-11-openjdk-amd64" stamp="1705922943606"/>
     <entry loc="/usr/lib/jvm/jdk-21-oracle-x64" stamp="1701779363961"/>
 </dirs>
