@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
-    <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
-    <fullyQualifiedTypeName name="com.accesodatos.hibernate.otrareunionmas.dao.PersonaDao"/>
-    <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
-    <fullyQualifiedTypeName name="com.accesodatos.hibernate.otrareunionmas.dominio.Persona"/>
     <fullyQualifiedTypeName name="javax.persistence.criteria.JoinType"/>
     <fullyQualifiedTypeName name="javax.persistence.TypedQuery"/>
     <fullyQualifiedTypeName name="com.accesodatos.hibernate.andaluciaskills.utiles.EntityManagerUtil"/>
@@ -60,4 +54,10 @@
     <fullyQualifiedTypeName name="javax.persistence.criteria.Join"/>
     <fullyQualifiedTypeName name="javax.persistence.criteria.Predicate"/>
     <fullyQualifiedTypeName name="dominio.Libro"/>
+    <fullyQualifiedTypeName name="com.mongodb.ConnectionString"/>
+    <fullyQualifiedTypeName name="com.mongodb.MongoClientSettings"/>
+    <fullyQualifiedTypeName name="com.mongodb.client.MongoClient"/>
+    <fullyQualifiedTypeName name="com.mongodb.client.MongoDatabase"/>
+    <fullyQualifiedTypeName name="com.mongodb.client.MongoClients"/>
+    <fullyQualifiedTypeName name="com.accesoadatos.ProyectoMongo.mongodb.MongoDB"/>
 </qualifiedTypeNameHistroy>
