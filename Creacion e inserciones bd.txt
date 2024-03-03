@@ -1,0 +1,69 @@
+MongoCollection<Document> profesores = db.getCollection("profesores");
+Document docProfesores = new Document("id", 456).append("DNI", "87654321Z").append("Interino", false)
+		.append("Guardias", null).append("Telefonos", new Document("Telefono Movil", "694 39 21 65"))
+		.append("Cursos", Arrays.asList("1ESO A", "3ESO B", "2 BACH"))
+		.append("dependencia", Arrays.asList(new Document("departamento", "Matematicas"),
+			new Document("departamento", "Ciencias Sociales")));
+profesores.insertOne(docProfesores);
+
+MongoCollection<Document> alumnos = db.getCollection("alumnos");
+Document docAlumnos = new Document("id", 123).append("DNI", "12345678A").append("Mayor de edad", true)
+		.append("Matricula de honor", null)
+		.append("Telefono padres",
+			new Document("Telefono Madre", "643 45 34 21").append("Telefono Padre", "657 38 21 69"))
+		.append("Nota trimestres", Arrays.asList(4, 5, 3)).append("profesor", 456);
+alumnos.insertOne(docAlumnos);
+
+Document docProfesor2 = new Document("id", 457).append("DNI", "76543214Y").append("Interino", true)
+		.append("Guardias", null).append("Telefonos", new Document("Telefono Movil", "694 39 21 66"))
+		.append("Cursos", Arrays.asList("4ESO A", "2 BACH")).append("dependencia", Arrays
+			.asList(new Document("departamento", "Lengua"), new Document("departamento", "Historia")));
+profesores.insertOne(docProfesor2);
+
+Document docProfesor3 = new Document("id", 458).append("DNI", "65432128X").append("Interino", false)
+		.append("Guardias", null).append("Telefonos", new Document("Telefono Movil", "694 39 21 67"))
+		.append("Cursos", Arrays.asList("1ESO B", "4ESO B")).append("dependencia",
+			Arrays.asList(new Document("departamento", "Fisica"), new Document("departamento", "Quimica")));
+profesores.insertOne(docProfesor3);
+
+Document docProfesor4 = new Document("id", 459).append("DNI", "54321927W").append("Interino", true)
+		.append("Guardias", null).append("Telefonos", new Document("Telefono Movil", "694 39 21 68"))
+		.append("Cursos", Arrays.asList("3ESO C", "1 BACH")).append("dependencia", Arrays
+			.asList(new Document("departamento", "Biologia"), new Document("departamento", "Geologia")));
+profesores.insertOne(docProfesor4);
+
+Document docAlumno2 = new Document("id", 124).append("DNI", "98765432B").append("Mayor de edad", false)
+		.append("Matricula de honor", null)
+		.append("Telefono padres",
+			new Document("Telefono Madre", "643 45 34 22").append("Telefono Padre", "657 38 21 70"))
+		.append("Nota trimestres", Arrays.asList(7, 5, 9)).append("profesor", Arrays.asList(459, 457));
+alumnos.insertOne(docAlumno2);
+
+Document docAlumno3 = new Document("id", 125).append("DNI", "87654321C").append("Mayor de edad", false)
+		.append("Matricula de honor", null)
+		.append("Telefono padres",
+			new Document("Telefono Madre", "643 45 34 23").append("Telefono Padre", "657 38 21 71"))
+		.append("Nota trimestres", Arrays.asList(5, 3, 6)).append("profesor", Arrays.asList(458, 457));
+alumnos.insertOne(docAlumno3);
+
+Document docAlumno4 = new Document("id", 126).append("DNI", "76543214D").append("Mayor de edad", false)
+		.append("Matricula de honor", null)
+		.append("Telefono padres",
+			new Document("Telefono Madre", "643 45 34 24").append("Telefono Padre", "657 38 21 72"))
+		.append("Nota trimestres", Arrays.asList(5, 5, 6)).append("profesor", Arrays.asList(458, 457));
+alumnos.insertOne(docAlumno4);
+
+Document docAlumno5 = new Document("id", 127).append("DNI", "65432127E").append("Mayor de edad", true)
+		.append("Matricula de honor", null)
+		.append("Telefono padres",
+			new Document("Telefono Madre", "643 45 34 25").append("Telefono Padre", "657 38 21 73"))
+		.append("Nota trimestres", Arrays.asList(1, 2, 1)).append("profesor", Arrays.asList(459, 457, 458));
+alumnos.insertOne(docAlumno5);
+
+Document docAlumno6 = new Document("id", 128).append("DNI", "54321375F").append("Mayor de edad", true)
+		.append("Matricula de honor", null)
+		.append("Telefono padres",
+			new Document("Telefono Madre", "643 45 34 26").append("Telefono Padre", "657 38 21 74"))
+		.append("Nota trimestres", Arrays.asList(8, 7, 8))
+		.append("profesor", Arrays.asList(459, 457, 456, 458));
+alumnos.insertOne(docAlumno6);
