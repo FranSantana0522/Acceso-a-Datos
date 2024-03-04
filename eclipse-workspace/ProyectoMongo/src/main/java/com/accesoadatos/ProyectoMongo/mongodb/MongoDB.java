@@ -8,6 +8,8 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Accumulators;
+
 import static com.mongodb.client.model.Filters.gt;
 import static com.mongodb.client.model.Filters.elemMatch;
 import static com.mongodb.client.model.Updates.addToSet;
@@ -18,6 +20,7 @@ import static com.mongodb.client.model.Aggregates.*;
 import static com.mongodb.client.model.Projections.*;
 import static com.mongodb.client.model.Sorts.*;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.util.Arrays;
 import java.util.List;
@@ -155,10 +158,11 @@ public class MongoDB {
 		System.out.println("----------------------");
 
 		// Consulta para encontrar alumnos con notas superiores a 7 en algún trimestre
-		FindIterable<Document> alumnosConNotasAltas = alumnosCollection
-				.find(elemMatch("Nota trimestres", gt("$gt", 7)));
+		Bson filter = gt("Nota trimestres", 7);
+		FindIterable<Document> alumnosNotasAltas = alumnosCollection.find(filter);
+
 		System.out.println("Alumnos con notas superiores a 7 en algún trimestre:");
-		for (Document alumno : alumnosConNotasAltas) {
+		for (Document alumno : alumnosNotasAltas) {
 			System.out.println(alumno.toJson());
 		}
 		System.out.println("----------------------");
@@ -186,135 +190,183 @@ public class MongoDB {
 		System.out.println("Todos los alumnos menores de edad pasan a mayor de edad");
 
 		// Incremento del curso de un profesor en 1
-		profesoresCollection.updateOne(eq("id", 457), inc("Cursos", 1));
+		profesoresCollection.updateOne(eq("id", 457), addToSet("Cursos", "2ESO B"));
 		System.out.println("Profesor con id 457 tiene un curso mas");
 
-		// Renombrar un campo de los alumnos 
+		// Renombrar un campo de los alumnos
 		alumnosCollection.updateOne(eq("id", 124), rename("Telefono padres", "Telefonos padres"));
 		System.out.println("Se ha renombrado el campo 'Telefono padres' a 'Telefonos padres'");
 
 		// Eliminar un curso de un profesor
-		profesoresCollection.updateOne(eq("id", 458), pull("Cursos", "1ESO B")); 
+		profesoresCollection.updateOne(eq("id", 458), pull("Cursos", "1ESO B"));
 		System.out.println("Profesor con id 458 ya no imparte clases en 1ESO B");
 
 	}
-	
-	//Consultas y modificaciones a los arrays
+
+	// Consultas y modificaciones a los arrays
 	public void conModArrays() {
-	    // Consulta para encontrar todos los profesores que imparten clases de Matematicas
-	    MongoCollection<Document> profesoresCollection = db.getCollection("profesores");
-	    FindIterable<Document> profesoresMatematicas = profesoresCollection.find(in("dependencia.departamento", "Matematicas"));
-	    System.out.println("Profesores que imparten clases de Matematicas:");
-	    for (Document profesor : profesoresMatematicas) {
-	        System.out.println(profesor.toJson());
-	    }
-	    System.out.println("----------------------");
+		// Consulta para encontrar todos los profesores que imparten clases de
+		// Matematicas
+		MongoCollection<Document> profesoresCollection = db.getCollection("profesores");
+		FindIterable<Document> profesoresMatematicas = profesoresCollection
+				.find(eq("dependencia.departamento", "Matematicas"));
 
-	    // Modificacion para agregar un nuevo curso a un profesor especifico
-	    profesoresCollection.updateOne(eq("id", 456), addToSet("Cursos", "4ESO A"));
-	    System.out.println("Profesor con id 456 ahora imparte clase en 4ESO A");
+		System.out.println("Profesores que imparten clases de Matematicas:");
+		for (Document profesor : profesoresMatematicas) {
+			System.out.println(profesor.toJson());
+		}
+		System.out.println("----------------------");
 
-	    // Modificacion para eliminar un curso de todos los profesores que lo imparten
-	    profesoresCollection.updateMany(all("Cursos", "1ESO A"), pull("Cursos", "1ESO A"));
-	    System.out.println("Profesores que impartan a 1ESO A dejaran de impartir a ese curso");
+		// Modificacion para agregar un nuevo curso a un profesor especifico
+		profesoresCollection.updateOne(eq("id", 456), addToSet("Cursos", "4ESO A"));
+		System.out.println("Profesor con id 456 ahora imparte clase en 4ESO A");
 
-	    // Consulta para encontrar todos los alumnos que tienen una nota mayor a 5 en algun trimestre
-	    MongoCollection<Document> alumnosCollection = db.getCollection("alumnos");
-	    FindIterable<Document> alumnosNotasAltas = alumnosCollection.find(elemMatch("Nota trimestres", gt("$gt", 5)));
-	    System.out.println("Alumnos con notas mayores a 5 en algún trimestre:");
-	    for (Document alumno : alumnosNotasAltas) {
-	        System.out.println(alumno.toJson());
-	    }
-	    System.out.println("----------------------");
+		// Modificacion para eliminar un curso de todos los profesores que lo imparten
+		profesoresCollection.updateMany(all("Cursos", "1ESO A"), pull("Cursos", "1ESO A"));
+		System.out.println("Profesores que impartan a 1ESO A dejaran de impartir a ese curso");
 
-	    // Modificacion para incrementar todas las notas de un alumno en un punto
-	    alumnosCollection.updateOne(eq("id", 123), inc("Nota trimestres", 1));
-	    System.out.println("Alumno con id 123 incrementa sus notas trimestrales en 1 punto");
+		// Consulta para encontrar todos los alumnos que tienen una nota mayor a 5 en
+		// algun trimestre
+		MongoCollection<Document> alumnosCollection = db.getCollection("alumnos");
+		Bson filter = gt("Nota trimestres", 5);
+		FindIterable<Document> alumnosNotasAltas = alumnosCollection.find(filter);
+
+		System.out.println("Alumnos con notas mayores a 5 en algún trimestre:");
+		for (Document alumno : alumnosNotasAltas) {
+			System.out.println(alumno.toJson());
+		}
+		System.out.println("----------------------");
+
+		// Modificacion para incrementar todas las notas de un alumno en un punto
+		// Recuperar el documento del alumno
+		Document alumno = alumnosCollection.find(eq("id", 123)).first();
+
+		// Obtener el array de notas trimestrales
+		List<Integer> notasTrimestres = alumno.getList("Nota trimestres", Integer.class);
+
+		// Iterar sobre el array y aumentar cada nota en 1 punto
+		for (int i = 0; i < notasTrimestres.size(); i++) {
+			notasTrimestres.set(i, notasTrimestres.get(i) + 1);
+		}
+
+		// Actualizar el documento con el nuevo array de notas trimestrales
+		// incrementadas
+		alumnosCollection.updateOne(eq("id", 123), set("Nota trimestres", notasTrimestres));
+
+		System.out.println("Notas trimestrales del alumno con id 123 incrementadas en 1 punto.");
 	}
-	
-	//Borrado de documentos
+
+	// Borrado de documentos
 	public void borradoDoc() {
 		MongoCollection<Document> profesoresCollection = db.getCollection("profesores");
-	    profesoresCollection.deleteOne(eq("id", 456));
-	    System.out.println("Profesor con id 456 eliminado");
-	    
-	    MongoCollection<Document> alumnoUpdate = db.getCollection("alumnos");
-	    alumnoUpdate.updateOne(eq("id", 123), set("Mayor de edad", false));
-	    System.out.println("Alumno con id " + 123 + " ahora es menor de edad");
-	    
-	    MongoCollection<Document> alumnoEliminar = db.getCollection("alumnos");
-	    alumnoEliminar.deleteMany(eq("Mayor de edad", false));
-	    System.out.println("Todos los alumnos menores de edad han sido eliminados");
-	}
-	
-	//Consultas de agregacion pipeline
-	public void consultasPipeline() {
-		MongoCollection<Document> alumnosCollection = db.getCollection("alumnos");
-	    AggregateIterable<Document> result = alumnosCollection.aggregate(Arrays.asList(
-	            match(eq("Mayor de edad", true)), // Filtra los alumnos mayores de edad
-	            unwind("$Nota trimestres"), // Divide el array Nota trimestres en documentos separados
-	            group("$profesor", avg("promedioNotas", "$Nota trimestres")), // Calcula la media de las notas por profesor
-	            sort(descending("promedioNotas")), // Ordena los resultados por media de notas, de mayor a menor
-	            limit(5), // Limita el resultado a los primeros 5 profesores con la media mas alta
-	            project(fields(include("profesor"), excludeId())) // Proyecta solo el campo profesor
-	    ));
+		profesoresCollection.deleteOne(eq("id", 456));
+		System.out.println("Profesor con id 456 eliminado");
 
-	    System.out.println("Profesores con la media de notas mas alta:");
-	    for (Document doc : result) {
-	        System.out.println(doc.toJson());
-	    }
+		MongoCollection<Document> alumnoUpdate = db.getCollection("alumnos");
+		alumnoUpdate.updateOne(eq("id", 123), set("Mayor de edad", false));
+		System.out.println("Alumno con id " + 123 + " ahora es menor de edad");
+
+		MongoCollection<Document> alumnoEliminar = db.getCollection("alumnos");
+		alumnoEliminar.deleteMany(eq("Mayor de edad", false));
+		System.out.println("Todos los alumnos menores de edad han sido eliminados");
 	}
-	
+
+	// Consultas de agregacion pipeline
+	public void consultasPipeline() {
+		MongoCollection<Document> profesores = db.getCollection("profesores");
+		AggregateIterable<Document> results = profesores.aggregate(Arrays.asList(
+				lookup("alumnos", "id", "profesor", "alumnos"), unwind("$alumnos"),
+				group("$id", Accumulators.push("notas_alumnos", "$alumnos.Nota trimestres")),
+				project(fields(include("_id"), include("notas_alumnos"),
+						computed("total_notas", new Document("$reduce",
+								new Document("input", "$notas_alumnos").append("initialValue", Arrays.asList()).append(
+										"in", new Document("$concatArrays", Arrays.asList("$$value", "$$this"))))))),
+				project(fields(include("_id"), computed("media_notas", new Document("$avg", "$total_notas")))),
+				sort(descending("media_notas"))));
+
+		System.out.println("Media total de las notas de los alumnos por profesor (de mayor a menor):");
+		for (Document doc : results) {
+			System.out.println(doc.toJson());
+		}
+	}
+
 	// Consultas para arrays usando funciones
 	public void consultasArrays() {
-	    // Consulta para encontrar profesores que imparten clases de Matematicas
-	    MongoCollection<Document> profesoresCollection = db.getCollection("profesores");
-	    FindIterable<Document> profesoresMatematicas = profesoresCollection.find(in("dependencia.departamento", "Matematicas"));
-	    System.out.println("Profesores que imparten clases de Matematicas:");
-	    for (Document profesor : profesoresMatematicas) {
-	        System.out.println(profesor.toJson());
-	    }
-	    System.out.println("----------------------");
+		// Consulta para encontrar profesores que imparten clases de Matematicas
+		MongoCollection<Document> profesoresCollection = db.getCollection("profesores");
+		FindIterable<Document> profesoresMatematicas = profesoresCollection
+				.find(in("dependencia.departamento", "Matematicas"));
+		System.out.println("Profesores que imparten clases de Matematicas:");
+		for (Document profesor : profesoresMatematicas) {
+			System.out.println(profesor.toJson());
+		}
+		System.out.println("No deberia salir profesor ya que fue eliminado antes");
+		System.out.println("----------------------");
 
-	    // Consulta para encontrar todos los alumnos que tienen una nota mayor a 5 en algún trimestre
-	    MongoCollection<Document> alumnosCollection = db.getCollection("alumnos");
-	    FindIterable<Document> alumnosNotasAltas = alumnosCollection.find(elemMatch("Nota trimestres", gt("$gt", 5)));
+		// Consulta para encontrar todos los alumnos que tienen una nota mayor a 5 en
+		// algún trimestre
+		MongoCollection<Document> alumnosCollection = db.getCollection("alumnos");
+		Bson filter = gt("Nota trimestres", 5);
+		FindIterable<Document> alumnosNotasAltas = alumnosCollection.find(filter);
 
-	    System.out.println("Alumnos con notas mayores a 5 en algun trimestre:");
-	    for (Document alumno : alumnosNotasAltas) {
-	        System.out.println(alumno.toJson());
-	    }
-	    System.out.println("----------------------");
+		System.out.println("Alumnos con notas mayores a 5 en algún trimestre:");
+		for (Document alumno : alumnosNotasAltas) {
+			System.out.println(alumno.toJson());
+		}
+		System.out.println("----------------------");
 
-	    // Modificacion para incrementar todas las notas de un alumno en un punto
-	    alumnosCollection.updateOne(eq("id", 123), inc("Nota trimestres", 1));
-	    System.out.println("Alumno con id 123 incrementa sus notas trimestrales en 1 punto");
+		// Modificacion para incrementar todas las notas de un alumno en un punto
+		// Recuperar el documento del alumno
+		Document alumno = alumnosCollection.find(eq("id", 124)).first();
+
+		// Obtener el array de notas trimestrales
+		List<Integer> notasTrimestres = alumno.getList("Nota trimestres", Integer.class);
+
+		// Iterar sobre el array y aumentar cada nota en 1 punto
+		for (int i = 0; i < notasTrimestres.size(); i++) {
+			notasTrimestres.set(i, notasTrimestres.get(i) + 1);
+		}
+
+		// Actualizar el documento con el nuevo array de notas trimestrales
+		// incrementadas
+		alumnosCollection.updateOne(eq("id", 124), set("Nota trimestres", notasTrimestres));
+
+		System.out.println("Notas trimestrales del alumno con id 124 incrementadas en 1 punto.");
 	}
-	
+
 	// Consultas sobre documentos enlazados
 	public void consultasDocumentosEnl() {
-	    // Consulta para encontrar alumnos y los profesores que les imparten clases
-	    MongoCollection<Document> alumnosCollection = db.getCollection("alumnos");
-	    FindIterable<Document> alumnos = alumnosCollection.find();
-	    
-	    System.out.println("Alumnos y sus profesores:");
-	    for (Document alumno : alumnos) {
-	        System.out.println("Alumno: " + alumno.toJson());
-	        // Obtenemos la lista de profesores del alumno
-	        List<Integer> profesoresIds = (List<Integer>) alumno.get("profesor");
-	        // Consultamos los profesores correspondientes a esos ids
-	        MongoCollection<Document> profesoresCollection = db.getCollection("profesores");
-	        FindIterable<Document> profesores = profesoresCollection.find(in("id", profesoresIds));
-	        System.out.println("Profesores:");
-	        for (Document profesor : profesores) {
-	            System.out.println(profesor.toJson());
-	        }
-	        System.out.println("----------------------");
-	    }
+		// Consulta para encontrar alumnos y los profesores que les imparten clases
+		MongoCollection<Document> alumnosCollection = db.getCollection("alumnos");
+		FindIterable<Document> alumnos = alumnosCollection.find();
+
+		System.out.println("Alumnos y sus profesores:");
+		for (Document alumno : alumnos) {
+			System.out.println("Alumno: " + alumno.toJson());
+			// Obtenemos la lista de profesores del alumno
+			List<Integer> profesoresIds = (List<Integer>) alumno.get("profesor");
+			// Consultamos los profesores correspondientes a esos ids
+			MongoCollection<Document> profesoresCollection = db.getCollection("profesores");
+			FindIterable<Document> profesores = profesoresCollection.find(in("id", profesoresIds));
+			System.out.println("Profesores:");
+			for (Document profesor : profesores) {
+				System.out.println(profesor.toJson());
+			}
+			System.out.println("----------------------");
+		}
 	}
 
+	// Método para borrar todos los documentos de una colección
+	public void borrarDocumentos(String nombreColeccion) {
+		// Obtener la colección
+		MongoCollection<Document> coleccion = db.getCollection(nombreColeccion);
 
-	
+		// Borrar todos los documentos de la colección
+		coleccion.deleteMany(new Document());
+
+		System.out.println("Todos los documentos de la colección '" + nombreColeccion + "' han sido eliminados.");
+	}
+
 	// Cerramos la conexion con la bd
 	public void cerrarConexion() {
 		mongoClient.close();
