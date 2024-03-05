@@ -275,13 +275,25 @@ public class MongoDB {
 	public void consultasPipeline() {
 		MongoCollection<Document> profesores = db.getCollection("profesores");
 		AggregateIterable<Document> results = profesores.aggregate(Arrays.asList(
-				lookup("alumnos", "id", "profesor", "alumnos"), unwind("$alumnos"),
+				// lookup para unir documentos de profesores con los de alumnos con la id que tienen
+				lookup("alumnos", "id", "profesor", "alumnos"), unwind("$alumnos"),//Se descompone el array alumnos
+				//Se agrupan los documentos por id y se utiliza un acumulador push para crear un nuevo campo 
 				group("$id", Accumulators.push("notas_alumnos", "$alumnos.Nota trimestres")),
+				//Se proyectan los campos deseados
 				project(fields(include("_id"), include("notas_alumnos"),
-						computed("total_notas", new Document("$reduce",
+						// Para definir un campo calculado
+						computed("total_notas", new Document("$reduce",// se calcula un nuevo campo con el reduce 
+								// input donde se mete el array sobre el que se realiza la reduccion, initialvalue
+								// array vacio donde se metera los datos
 								new Document("input", "$notas_alumnos").append("initialValue", Arrays.asList()).append(
+										// in se ejecuta en cada iteracion 
+										// concatArrays concatena dos arrays 
+										// value representa el valor acumulado
+										// this el valor actual
 										"in", new Document("$concatArrays", Arrays.asList("$$value", "$$this"))))))),
+				// Se proyecta los campos deseados nuevos con la media de notas
 				project(fields(include("_id"), computed("media_notas", new Document("$avg", "$total_notas")))),
+				// Lo ordenamos de mayor a menor
 				sort(descending("media_notas"))));
 
 		System.out.println("Media total de las notas de los alumnos por profesor (de mayor a menor):");

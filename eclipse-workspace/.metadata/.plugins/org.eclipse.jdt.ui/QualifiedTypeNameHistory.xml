@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javax.persistence.criteria.JoinType"/>
-    <fullyQualifiedTypeName name="javax.persistence.TypedQuery"/>
-    <fullyQualifiedTypeName name="com.accesodatos.hibernate.andaluciaskills.utiles.EntityManagerUtil"/>
     <fullyQualifiedTypeName name="com.accesodatos.hibernate.andaluciaskills.dao.Dao"/>
     <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
     <fullyQualifiedTypeName name="javax.persistence.OneToOne"/>
@@ -60,4 +57,7 @@
     <fullyQualifiedTypeName name="com.mongodb.client.MongoDatabase"/>
     <fullyQualifiedTypeName name="com.mongodb.client.MongoClients"/>
     <fullyQualifiedTypeName name="com.accesoadatos.ProyectoMongo.mongodb.MongoDB"/>
+    <fullyQualifiedTypeName name="org.bson.conversions.Bson"/>
+    <fullyQualifiedTypeName name="com.mongodb.client.model.Accumulators"/>
+    <fullyQualifiedTypeName name="com.mongodb.client.model.UnwindOptions"/>
 </qualifiedTypeNameHistroy>
